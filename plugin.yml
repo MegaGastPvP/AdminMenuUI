@@ -1,8 +1,12 @@
-name: BanUI
-main: BanUI\Main
+name: AdminMenuUI
+main: AdminMenuUI\Main
 api: [3.0.0-ALPHA7, 3.0.0-ALPHA8, 3.0.0-ALPHA9]
 version: 1.0
 author: MegaGastPvP
 commands:
- bangui:
-  description: "Bans a Player"
+ adminmenu:
+    default: op
+    aliases: ["am"]
+permissons:
+  adminmenu.use
+    default: op
