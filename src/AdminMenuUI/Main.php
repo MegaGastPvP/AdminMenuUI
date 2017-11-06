@@ -21,81 +21,41 @@ class Main extends PluginBase implements Listener {
         $this->getLogger()->info(TextFormat::RED . "WarpUI disabled.");
     }	
     public function onCommand(CommandSender $sender, Command $cmd, string $label,array $args) : bool {
-		            switch($cmd->getName()){	
-			                  case "warpme":
-				                        if($sender instanceof Player) {									
-					                              $api = $this->getServer()->getPluginManager()->getPlugin("FormAPI");					
-					                              if($api === null || $api->isDisabled()){				
- 				                                }				
-					                              $form = $api->createSimpleForm(function (Player $sender, array $data){
-					                              $result = $data[0];				
-					                              if($result === null){					
-					                              }       
-					                            	        switch($result){							
-							                                          case 0:														
-	      						                                           $this->getServer()->dispatchCommand(new ConsoleCommandSender, "tp " . $sender . " 0 0 0");					
-								                                               break;								
-							                                          case 1:
-								// If tp {player} 0 0 0 is for op command use this so console will tp player
-
-								$this->getServer()->dispatchCommand(new ConsoleCommandSender, "tp " . $sender . " 0 0 0");
-
-								
-
-								// If tp player is for everybody use this
-
-								//$command1 = "tp {player} 0 0 0";
-
-								//$this->getServer()->getCommandMap()->dispatch($sender, $command1};
-
-								break;
-
-							
-
-						}
-
-					
-
-					});
-
-					
-
-					$form->setTitle("Warp Screen");
-
+	        switch($cmd->getName()){	
+		        case "warpme":
+		            if($sender->hasPermission("adminmenu.use"){		
+				if($sender instanceof Player) {									
+					$api = $this->getServer()->getPluginManager()->getPlugin("FormAPI");					
+			                if($api === null || $api->isDisabled()){				
+ 				        }				
+				        $form = $api->createSimpleForm(function (Player $sender, array $data){
+				        $result = $data[0];				
+				        if($result === null){					
+				        }       
+					        switch($result){							
+					     	        case 0:														
+	      						       $command = "banui";
+							       $this->getServer->getCommandMap()->dispatch($sender, $command);
+							       break;								
+						        case 1:
+						 	       $command = "kickui";
+							       $this->getServer()->getCommandMap()->dispatch($sender, $command);	
+							       break;							
+					        }					
+					});					
+					$form->setTitle("AdminMenu Screen");
 					$form->setContent("Please choose your destination.");
-
-					$form->addButton(TextFormat::BOLD . "Shop");
-
-					$form->addButton(TextFormat::BOLD . "PvP");	
-
+					$form->addButton(TextFormat::BOLD . "Ban");
+					$form->addButton(TextFormat::BOLD . "Kick");	
 					$form->sendToPlayer($sender);
-
-					// END
-
-					
-
+					// END				
+				}else{
+				        $sender->sendMessage(TextFormat::RED . "use this command ingame mighty consolemen/consolemadem");
 				}
-
-				else{
-
-					$sender->sendMessage(TextFormat::RED . "Use this Command in-game.");
-
-					return true;
-
-				}
-
-			break;
-
-			
-
-			
-
+			    }	    
+				
+			break;		
 		}
-
 		return true;
-
-    }
-
-	
-
+    }	
 }
